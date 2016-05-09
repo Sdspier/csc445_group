@@ -31,6 +31,7 @@ public class AtmxClient {
     public AtmxClient(List<Address> hostList)
     {
         this.clusterHostList = hostList;
+        init();
     }
 
     private void init() {
