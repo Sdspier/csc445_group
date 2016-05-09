@@ -1,4 +1,4 @@
-package atmxclient;
+package client;
 
 import io.atomix.AtomixClient;
 import io.atomix.catalyst.transport.Address;
