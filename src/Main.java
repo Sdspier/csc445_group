@@ -1,3 +1,5 @@
+import io.atomix.catalyst.transport.Address;
+
 import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ public class Main
         // Hosts are in the hosts.txt file, formatted as such:
         // [host]:[port]'
 
-        ArrayList<HostHolder> hostList = new ArrayList<>();
+        ArrayList<Address> hostList = new ArrayList<>();
 
         File hostFile = new File("hosts.txt");
         try (
@@ -21,7 +23,7 @@ public class Main
                 String[] splitStr = line.split(":");
                 String hostStr = splitStr[0];
                 int hostPort = Integer.getInteger(splitStr[0]);
-                hostList.add(new HostHolder(hostStr, hostPort));
+                hostList.add(new Address(hostStr, hostPort));
             }
         } catch (FileNotFoundException ex) {
             System.out.println("Error: hosts.txt file not found");
@@ -32,13 +34,4 @@ public class Main
 
     }
 
-    private static final class HostHolder {
-        final String host;
-        final int port;
-
-        HostHolder(String host, int port) {
-            this.host = host;
-            this.port = port;
-        }
-    }
 }
