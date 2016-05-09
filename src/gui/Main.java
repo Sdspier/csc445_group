@@ -1,5 +1,5 @@
 
-package pkg445group;
+package gui;
 
 import java.util.ArrayList;
 
