@@ -28,8 +28,8 @@ public class AtmxClient {
         init();
     }
 
-    public AtmxClient(List<Address> hostList)
-    {
+    public AtmxClient(List<Address> hostList) {
+        // Use the hosts provided in args
         this.clusterHostList = hostList;
         init();
     }
