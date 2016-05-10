@@ -1,0 +1,34 @@
+
+1. How is a leader elected?
+	- In Raft there are two timeout settings which control elections
+	- First is the election timeout
+		- The election timeout is the amount of time a follower waits until becoming a candidate
+		- The election timeout should be randomized to be between 150ms and 300ms
+		- After the election timeout the follower becomes a candidate and starts a new election term, votes for itself, and sends out Request Vote messages to other nodes.
+		- If the receiving node hasn't voted yet in this term then it votes for the candidate, and the node resets its election timeout.
+		- Once a candidate has a majority of votes it becomes leader
+		- The leader begins sending out Append Entries messages to its followers
+		- These messages are sent in intervals specified by the heartbeat timeout
+		- Followers then respond to each Append Entries message
+		- This election term will continue until a follower stops receiving heartbeats and becomes a candidate
+		- If two nodes become candidates at the same time then a split vote can occur
+
+3. What happens if two nodes timeout at the same time? (Split vote)
+	- The nodes will wait for a new election and try again.
+
+2. What happens if a node fails?
+	- Leader election occurs
+
+4. What happens in the event of a partition?
+	- If a node cannot replicate to a majority its log entry stays uncommitted
+	- That node will see the higher election term and step down after the partition is healed
+
+5. How are changes made to the variables? (Log replication process)
+	- Each change is added as an entry in the node's log
+	- At first the log entry is uncommitted so it won't update the node's value
+	- To commit the entry the node first replicates it to the follower nodes...
+	- Then the leader waits until a majority of nodes have written the entry
+	- The entry is now committed on the leader node and the node state is set
+	- The leader then notifies the followers that the entry is committed
+	- The cluster has now come to consensus about the system state
+	
