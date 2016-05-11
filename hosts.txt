@@ -1,5 +1,8 @@
-Jasons-MacBook-Pro.local:2694
-cassidy.local:2694
+pi.cs.oswego.edu:9491
+pi.cs.oswego.edu:2703
+pi.cs.oswego.edu:2715
+pi.cs.oswego.edu:2694
+127.0.0.1:9491
 127.0.0.1:9000
 127.0.0.1:9001
 127.0.0.1:9002

@@ -18,6 +18,7 @@ public class Main
 
     private static String LOCAL_HOSTNAME;
     private static final String ARG_GUI = "gui";
+    private static final String ARG_PORT = "port";
     private static boolean using_gui = false;
 
 
@@ -33,16 +34,30 @@ public class Main
 
     public static void main(String[] args)
     {
+        // start out using the default port
+        // the command line can call for a custom port number
+        int use_port = AtmxCluster.DEFAULT_PORT;
         // Parse command line arguments
         for (String workingArg : args) {
-            if (workingArg.equals(ARG_GUI)) {
-                using_gui = true;
-                continue;
+            switch (workingArg) {
+                case ARG_GUI:
+                    using_gui = true;
+                    continue;
+                case ARG_PORT:
+                    String port_str = workingArg.split(":")[1];
+                    use_port = Integer.parseInt(port_str);
+                    System.out.println("Using custom port: " + Integer.toString(use_port));
+                    continue;
+                default:
+                    System.out.println("Unknown argument. Exiting...");
+                    System.exit(1);
+                    break;
             }
+
         }
 
         // Create the central cluster object
-        AtmxCluster mainCluster = new AtmxCluster();
+        AtmxCluster mainCluster = new AtmxCluster(use_port);
 
         // create the main
         TextEditorUI mainWindow = null;

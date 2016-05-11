@@ -24,7 +24,7 @@ public class AtmxCluster
 
 
     private static String LOCAL_HOSTNAME;
-    private static int DEFAULT_PORT = 9491;
+    public static int DEFAULT_PORT = 9491;
     static {
         try {
             LOCAL_HOSTNAME = InetAddress.getLocalHost().getHostName();
