@@ -12,6 +12,7 @@ import java.io.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class Main
 {
@@ -58,7 +59,14 @@ public class Main
         }
 
         // Create the central cluster object
-        AtmxCluster mainCluster = new AtmxCluster(use_port);
+        AtmxCluster mainCluster = null;
+        try {
+            mainCluster = new AtmxCluster(use_port);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         // create the main
         TextEditorUI mainWindow = null;
