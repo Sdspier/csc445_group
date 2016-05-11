@@ -1,5 +1,6 @@
 package edu.oswego.cs.jsavlov.cluster;
 
+import edu.oswego.cs.jsavlov.Main;
 import io.atomix.AtomixReplica;
 import io.atomix.catalyst.transport.Address;
 import io.atomix.catalyst.transport.NettyTransport;
@@ -22,12 +23,22 @@ public class AtmxCluster
     protected static final String SHARED_STRING = "shared_str";
 
 
+    private static String LOCAL_HOSTNAME;
+    private static int DEFAULT_PORT = 9491;
+    static {
+        try {
+            LOCAL_HOSTNAME = InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Instance variables
      */
     private AtomixReplica atomix;
     private String currentValue = "";
-
+    private int port_number;
 
     public static void main(String args[])
     {
@@ -39,6 +50,13 @@ public class AtmxCluster
      */
     public AtmxCluster()
     {
+        port_number = DEFAULT_PORT;
+        init();
+    }
+
+    public AtmxCluster(int port)
+    {
+        port_number = port;
         init();
     }
 
@@ -50,7 +68,7 @@ public class AtmxCluster
     private void init()
     {
         ArrayList<Address> hostList = new ArrayList<>();
-        Address selfAddr = null;
+        Address selfAddr = new Address(LOCAL_HOSTNAME, port_number);
         File hostFile = new File("hosts.txt");
         try (
                 BufferedReader reader = new BufferedReader(new FileReader(hostFile))
@@ -62,8 +80,10 @@ public class AtmxCluster
                 int hostPort = Integer.valueOf(splitStr[1]);
                 hostList.add(new Address(hostStr, hostPort));
             }
-            selfAddr = hostList.get(0);
-            hostList = new ArrayList(hostList.subList(1, hostList.size()));
+            if (hostList.contains(selfAddr)) {
+                hostList.remove(selfAddr);
+            }
+            //hostList = new ArrayList(hostList.subList(1, hostList.size()));
         } catch (FileNotFoundException ex) {
             System.out.println("Error: hosts.txt file not found");
             ex.printStackTrace();
