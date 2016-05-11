@@ -1,6 +1,7 @@
 package edu.oswego.cs.jsavlov.ui;
 
 import edu.oswego.cs.jsavlov.cluster.AtmxCluster;
+import edu.oswego.cs.jsavlov.cluster.ClusterActionListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,9 +9,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.concurrent.ExecutionException;
 
 
-public class TextEditorUI extends JFrame {
+public class TextEditorUI extends JFrame implements ClusterActionListener {
 
     /**
      * Instance variables
@@ -24,7 +26,13 @@ public class TextEditorUI extends JFrame {
     public static void main(String[] args)
     {
 
-        TextEditorUI ui = new TextEditorUI(new AtmxCluster());
+        try {
+            TextEditorUI ui = new TextEditorUI(new AtmxCluster());
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -32,7 +40,11 @@ public class TextEditorUI extends JFrame {
      * Constructor
      */
     public TextEditorUI(AtmxCluster cluster) {
+
+        // Assign the cluster object
         this.cluster = cluster;
+        cluster.addListener(this);
+
         area.setFont(new Font("Monospaced", Font.PLAIN, 12));
         JScrollPane scroll = new JScrollPane(area, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -54,14 +66,6 @@ public class TextEditorUI extends JFrame {
         setVisible(true);
     }
 
-    /**
-     * Initialize the edu.oswego.cs.jsavlov.cluster
-     */
-    private void init_cluster()
-    {
-
-    }
-
     private KeyListener k1 = new KeyAdapter() {
         public void keyPressed(KeyEvent e) {
             changed = true;
@@ -81,7 +85,7 @@ public class TextEditorUI extends JFrame {
                     "Nothing pushed to server.");
         } else {
             // Push the new string to the edu.oswego.cs.jsavlov.cluster
-
+            cluster.postNewMessage(area.getText());
 
             JOptionPane.showMessageDialog(area,
                     "[ " + areaText + " ]" + "\n Pushed to server");
@@ -90,6 +94,11 @@ public class TextEditorUI extends JFrame {
 
     }
 
+    @Override
+    public void onReceiveNewMessage(String message)
+    {
+        this.area.setText(message);
+    }
 
     Action QUIT = new AbstractAction("[ Quit ]") {
         public void actionPerformed(ActionEvent e) {
