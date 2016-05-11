@@ -6,6 +6,8 @@ import io.atomix.catalyst.transport.NettyTransport;
 import io.atomix.copycat.server.storage.Storage;
 
 import java.io.*;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 /**
@@ -26,10 +28,17 @@ public class AtmxCluster
     private AtomixReplica atomix;
     private String currentValue = "";
 
+    static {
+        try {
+            System.out.println("hostname = " + InetAddress.getLocalHost().getHostName());
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String args[])
     {
-        new AtmxCluster().init();
+        new AtmxCluster();
     }
 
     /**
@@ -82,7 +91,7 @@ public class AtmxCluster
             System.out.println("Bootstrap and join complete.");
         });
 
-
+        System.out.println("Cluster commenced.");
     }
 
 

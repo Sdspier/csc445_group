@@ -1,5 +1,7 @@
 package ui;
 
+import cluster.AtmxCluster;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,18 +12,27 @@ import java.awt.event.KeyListener;
 
 public class TextEditorUI extends JFrame {
 
+    /**
+     * Instance variables
+     */
     private JTextArea area = new JTextArea(20, 120);
     private String currentFile = "[ TEXT FILE ]";
     private boolean changed = false;
     private static String areaText;
+    private final AtmxCluster cluster;
 
     public static void main(String[] args)
     {
-        TextEditorUI ui = new TextEditorUI();
+
+        TextEditorUI ui = new TextEditorUI(new AtmxCluster());
     }
 
 
-    public TextEditorUI() {
+    /**
+     * Constructor
+     */
+    public TextEditorUI(AtmxCluster cluster) {
+        this.cluster = cluster;
         area.setFont(new Font("Monospaced", Font.PLAIN, 12));
         JScrollPane scroll = new JScrollPane(area, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
@@ -43,6 +54,14 @@ public class TextEditorUI extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Initialize the cluster
+     */
+    private void init_cluster()
+    {
+
+    }
+
     private KeyListener k1 = new KeyAdapter() {
         public void keyPressed(KeyEvent e) {
             changed = true;
@@ -61,6 +80,9 @@ public class TextEditorUI extends JFrame {
             JOptionPane.showMessageDialog(area,
                     "Nothing pushed to server.");
         } else {
+            // Push the new string to the cluster
+
+
             JOptionPane.showMessageDialog(area,
                     "[ " + areaText + " ]" + "\n Pushed to server");
         }
