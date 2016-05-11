@@ -1,3 +1,5 @@
+package edu.oswego.cs.jsavlov;
+
 import edu.oswego.cs.jsavlov.client.AtmxClient;
 import io.atomix.catalyst.transport.Address;
 
