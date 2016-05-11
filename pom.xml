@@ -40,11 +40,6 @@
             <artifactId>catalyst-common</artifactId>
             <version>1.0.7</version>
         </dependency>
-        <dependency>
-            <groupId>io.atomix.catalyst</groupId>
-            <artifactId>catalyst-parent</artifactId>
-            <version>1.0.7</version>
-        </dependency>
     </dependencies>
 
 
