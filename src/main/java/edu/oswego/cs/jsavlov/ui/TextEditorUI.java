@@ -32,7 +32,10 @@ public class TextEditorUI extends JFrame {
      * Constructor
      */
     public TextEditorUI(AtmxCluster cluster) {
+
+        // Assign the cluster object
         this.cluster = cluster;
+
         area.setFont(new Font("Monospaced", Font.PLAIN, 12));
         JScrollPane scroll = new JScrollPane(area, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                 JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
