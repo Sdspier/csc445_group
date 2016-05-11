@@ -1,8 +1,7 @@
-import client.AtmxClient;
+import edu.oswego.cs.jsavlov.client.AtmxClient;
 import io.atomix.catalyst.transport.Address;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Main

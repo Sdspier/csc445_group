@@ -1,4 +1,4 @@
-package cluster;
+package edu.oswego.cs.jsavlov.cluster;
 
 import io.atomix.AtomixReplica;
 import io.atomix.catalyst.transport.Address;
@@ -86,7 +86,7 @@ public class AtmxCluster
                 .withStorage(new Storage(STORAGE_DIRECTORY))
                 .build();
 
-        // Bootstrap the cluster
+        // Bootstrap the edu.oswego.cs.jsavlov.cluster
         atomix.bootstrap().join().join(hostList).thenRun(() -> {
             System.out.println("Bootstrap and join complete.");
         });
@@ -96,9 +96,9 @@ public class AtmxCluster
 
 
     /**
-     * @param msg: The new message from the client to be broadcast across the cluster.
+     * @param msg: The new message from the edu.oswego.cs.jsavlov.client to be broadcast across the edu.oswego.cs.jsavlov.cluster.
      *
-     * Used to broadcast messages across the cluster
+     * Used to broadcast messages across the edu.oswego.cs.jsavlov.cluster
      */
     public void postNewMessage(String msg)
     {

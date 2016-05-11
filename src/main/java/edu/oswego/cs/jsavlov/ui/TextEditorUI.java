@@ -1,6 +1,6 @@
-package ui;
+package edu.oswego.cs.jsavlov.ui;
 
-import cluster.AtmxCluster;
+import edu.oswego.cs.jsavlov.cluster.AtmxCluster;
 
 import javax.swing.*;
 import java.awt.*;
@@ -55,7 +55,7 @@ public class TextEditorUI extends JFrame {
     }
 
     /**
-     * Initialize the cluster
+     * Initialize the edu.oswego.cs.jsavlov.cluster
      */
     private void init_cluster()
     {
@@ -80,7 +80,7 @@ public class TextEditorUI extends JFrame {
             JOptionPane.showMessageDialog(area,
                     "Nothing pushed to server.");
         } else {
-            // Push the new string to the cluster
+            // Push the new string to the edu.oswego.cs.jsavlov.cluster
 
 
             JOptionPane.showMessageDialog(area,

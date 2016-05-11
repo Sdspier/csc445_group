@@ -1,16 +1,12 @@
-package client;
+package edu.oswego.cs.jsavlov.client;
 
 import io.atomix.AtomixClient;
 import io.atomix.catalyst.transport.Address;
 import io.atomix.catalyst.transport.NettyTransport;
-import io.atomix.collections.internal.QueueCommands;
-import io.atomix.variables.DistributedValue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 public class AtmxClient {
 
