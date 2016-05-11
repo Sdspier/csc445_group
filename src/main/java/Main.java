@@ -1,11 +1,26 @@
 import edu.oswego.cs.jsavlov.client.AtmxClient;
 import io.atomix.catalyst.transport.Address;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.*;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 public class Main
 {
+
+    static {
+        try {
+            System.out.println("hostname = " + InetAddress.getLocalHost().getHostName());
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean enteringInput = false;
+
     public static void main(String[] args)
     {
         // Load the hosts.txt.
@@ -35,6 +50,36 @@ public class Main
 
         AtmxClient client = new AtmxClient(hostList);
 
+    }
+
+
+    private static final class MasterKeyControlListener implements KeyListener
+    {
+
+        private final AtmxClient client;
+
+        MasterKeyControlListener(AtmxClient client)
+        {
+            this.client = client;
+        }
+
+        @Override
+        public void keyTyped(KeyEvent e)
+        {
+
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e)
+        {
+
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e)
+        {
+
+        }
     }
 
 }

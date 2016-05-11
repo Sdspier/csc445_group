@@ -28,13 +28,6 @@ public class AtmxCluster
     private AtomixReplica atomix;
     private String currentValue = "";
 
-    static {
-        try {
-            System.out.println("hostname = " + InetAddress.getLocalHost().getHostName());
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
-    }
 
     public static void main(String args[])
     {
