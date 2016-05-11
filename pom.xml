@@ -25,6 +25,33 @@
             <artifactId>atomix-all</artifactId>
             <version>1.0.0-rc4</version>
         </dependency>
+        <dependency>
+            <groupId>io.atomix.catalyst</groupId>
+            <artifactId>catalyst-buffer</artifactId>
+            <version>1.0.7</version>
+        </dependency>
+        <dependency>
+            <groupId>io.atomix.catalyst</groupId>
+            <artifactId>catalyst-serializer</artifactId>
+            <version>1.0.7</version>
+        </dependency>
+        <dependency>
+            <groupId>io.atomix.catalyst</groupId>
+            <artifactId>catalyst-transport</artifactId>
+            <version>1.0.7</version>
+        </dependency>
+        <dependency>
+            <groupId>io.atomix.catalyst</groupId>
+            <artifactId>catalyst-common</artifactId>
+            <version>1.0.7</version>
+        </dependency>
+        <dependency>
+            <groupId>io.atomix.catalyst</groupId>
+            <artifactId>catalyst-parent</artifactId>
+            <version>1.0.7</version>
+        </dependency>
+
+
     </dependencies>
 
 
