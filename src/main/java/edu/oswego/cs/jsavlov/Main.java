@@ -39,7 +39,8 @@ public class Main
         int use_port = AtmxCluster.DEFAULT_PORT;
         // Parse command line arguments
         for (String workingArg : args) {
-            switch (workingArg) {
+            String workingArgFirst = workingArg.split(":")[0];
+            switch (workingArgFirst) {
                 case ARG_GUI:
                     using_gui = true;
                     continue;
