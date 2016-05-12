@@ -117,8 +117,6 @@ public class AtmxCluster
             ex.printStackTrace();
         }
 
-        // TODO: Add code to remove "copycat" files present in the storage directory
-
         // Create the replica
         atomix = AtomixReplica.builder(selfAddr)
                 .withTransport(new NettyTransport())
@@ -165,7 +163,6 @@ public class AtmxCluster
      */
     public void postNewMessage(String msg)
     {
-
 
         atomix.getValue(SHARED_STRING).thenAccept((value) -> {
             value.set(msg).thenRun(() -> {
